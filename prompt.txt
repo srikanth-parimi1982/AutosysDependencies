@@ -1,0 +1,12 @@
+Imagine you are an ETL pipeline, Autosys job designer and also who is good at progamming languages and frameworks for both frontend and backend. Need your help with creating me a streamlit based application that can do below functionality
+
+You will receive 2 input files. Firstly, one consolidated Autosys jil scripts code that has all jobs and their depenencies info.
+Secondly, current run information of all the Autosys jobs execution which contains the jobs run information, generated using autorep -J, in all possible statuses.
+
+I need you to process these 2 input files and create me a streamlit based application that can produce me a knowledge graph kind of dashboard view which helps users to understand 2 things.
+
+1. providing the dependency view amongst the autosys jobs
+2. based on the job execution status should highlight or color code the list of jobs that could get impacted in that graph or node structure view.
+3. If a job is in running state then highlight the dependent jobs info / nodes in amber
+4. If a job is in failed or terminated state then highlight the dependent jobs info / nodes in red
+5. If a job has completed successfully then highlight the completed ones in green
