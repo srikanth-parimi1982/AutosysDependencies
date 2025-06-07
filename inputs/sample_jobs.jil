@@ -1,0 +1,53 @@
+insert_job: JOB_A
+job_type: CMD
+command: echo "Starting the flow"
+machine: localhost
+owner: autosys@dev
+
+insert_job: JOB_B
+job_type: CMD
+command: /scripts/process_data.sh
+machine: localhost
+owner: autosys@dev
+condition: success(JOB_A)
+
+insert_job: JOB_C
+job_type: CMD
+command: /scripts/generate_report.sh
+machine: localhost
+owner: autosys@dev
+condition: success(JOB_A)
+
+insert_job: JOB_D_LONG_RUNNING
+job_type: CMD
+command: sleep 3600
+machine: localhost
+owner: autosys@dev
+condition: success(JOB_B)
+
+insert_job: JOB_E_FINAL
+job_type: CMD
+command: /scripts/archive.sh
+machine: localhost
+owner: autosys@dev
+condition: success(JOB_C) & success(JOB_D_LONG_RUNNING)
+
+insert_job: JOB_F_FAILED
+job_type: CMD
+command: exit 1
+machine: localhost
+owner: autosys@dev
+condition: success(JOB_A)
+
+insert_job: JOB_G_IMPACTED
+job_type: CMD
+command: echo "This will not run"
+machine: localhost
+owner: autosys@dev
+condition: success(JOB_F_FAILED)
+
+insert_job: JOB_H_STANDALONE
+job_type: CMD
+command: echo "I am independent"
+machine: localhost
+owner: autosys@dev
